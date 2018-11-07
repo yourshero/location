@@ -6,12 +6,14 @@
     <title>获取地理位置</title>
     <style type="text/css">#iCenter{width:300px; height: 280px; border:1px #000 solid;margin:20px auto;}</style>
     <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.3&key=2211b26cad1ad27d7847f2f6ebf89bba"></script>
+    <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
 </head>
 <body>
 
 <div id="iCenter"></div>
 
 <script type="text/javascript">
+alert(returnCitySN['cip'] + returnCitySN['cname']);
     var mapObj = new AMap.Map('iCenter');
     mapObj.plugin('AMap.Geolocation', function () {
         geolocation = new AMap.Geolocation({
@@ -29,6 +31,7 @@
         });
         mapObj.addControl(geolocation);
         geolocation.getCurrentPosition();
+        console.log(1);
         AMap.event.addListener(geolocation, 'complete', onComplete); // 返回定位信息
         AMap.event.addListener(geolocation, 'error', onError);       // 返回定位出错信息
     });
@@ -75,50 +78,31 @@
 <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.7&key=2211b26cad1ad27d7847f2f6ebf89bba"></script>
             
             <script type="text/javascript">
-	
-               if(navigator.geolocation){
-navigator.geolocation.getCurrentPosition(getPositionSuccess, getPositionError);
-}else{
-alert("您的浏览器不支持自动定位!");
-}
-/***用户定位成功**/
-function getPositionSuccess(position){
-var lat = position.coords.latitude;
-var lng = position.coords.longitude;
-var address="";
+
 
 
 //通过baiduMap API获取街道名称
-var map = new BMap.Map("allmap");
-var point = new BMap.Point(lng,lat);
-var gc = new BMap.Geocoder();
-gc.getLocation(point, function(rs){
- var addComp = rs.addressComponents;
- address = addComp.city + addComp.district + addComp.street + addComp.streetNumber;
- alert("longitude="+lng+"atitude="+lat);
- alert("address="+address);
-});
+var map = new AMap.Map("allmap");
+var point = new AMap.Point(lng,lat);
+var gc = new AMap.Geocoder();
+map.plugin('AMap.Geolocation', function() {
+        geolocation = new AMap.Geolocation({
+            enableHighAccuracy: true,//是否使用高精度定位，默认:true
+            timeout: 10000,          //超过10秒后停止定位，默认：无穷大
+            buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+            zoomToAccuracy: true,      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+            buttonPosition:'RB',
+            useNative:true
+        });
+        map.addControl(geolocation);
+        geolocation.getCurrentPosition();
+        AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
+        AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
+    });
 
 
-}
 
 
-
-
-/**用户定位失败**/
-function getPositionError(error){
-switch(error.code){
-case error.TIMEOUT:
-alert("连接超时，请重试");
-break;
-case error.PERMISSION_DENIED:
-alert("您拒绝了使用位置共享服务，查询已取消");
-break;
-case error.POSITION_UNAVAILABLE:
-alert("亲爱的火星网友，非常抱歉，我们暂时无法为您所在的星球提供位置服务");
-break;
-}
-}
             </script>
         </body>
 
