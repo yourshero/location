@@ -20,7 +20,7 @@
     <h4 id='status'></h4><hr>
     <p id='result'></p><hr>
     <span>城市:</span>
-    <span id="address"></span>
+    <input id='address' type="text" disabled>
 </div>
 <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.10&key=5d0df2d57e93e6bf693da70495c87b81"></script>
 <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.10&key=5d0df2d57e93e6bf693da70495c87b81&plugin=AMap.Geocoder"></script>
@@ -58,24 +58,15 @@
         }//如为IP精确定位结果则没有精度信息
         str.push('是否经过偏移：' + (data.isConverted ? '是' : '否'));
         document.getElementById('result').innerHTML = str.join('<br>');
-        regeoCode(data);
-    }
-    //解析定位错误信息
-    function onError(data) {
-        document.getElementById('status').innerHTML='定位失败'
-        document.getElementById('result').innerHTML = '失败原因排查信息:'+data.message;
-    }
-
-
-    var geocoder,marker;
-    function regeoCode() {
+        var inglat = data.position;
+        var geocoder,marker;
         if(!geocoder){
             geocoder = new AMap.Geocoder({
                 city: "010", //城市设为北京，默认：“全国”
                 radius: 1000 //范围，默认：500
             });
         }
-        var lnglat  = data.position.split(',');
+        var lnglat  = inglat.split(',');
          if(!marker){
             marker = new AMap.Marker();
             map.add(marker);
@@ -85,10 +76,21 @@
         geocoder.getAddress(lnglat, function(status, result) {
             if (status === 'complete'&&result.regeocode) {
                 var address = result.regeocode.formattedAddress;
-                document.getElementById('address').innerHTML = address;
+                document.getElementById('address').value = address;
             }else{alert(JSON.stringify(result))}
         });
     }
+    //解析定位错误信息
+    function onError(data) {
+        document.getElementById('status').innerHTML='定位失败'
+        document.getElementById('result').innerHTML = '失败原因排查信息:'+data.message;
+    }
+
+
+    
+    
+        
+    
  
 </script>
 </body>
