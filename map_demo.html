@@ -23,6 +23,7 @@
     <input id='address' type="text" disabled>
     <span id="address1"></span>
 </div>
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.10&key=5d0df2d57e93e6bf693da70495c87b81"></script>
 <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.10&key=5d0df2d57e93e6bf693da70495c87b81&plugin=AMap.Geocoder"></script>
 <script type="text/javascript">
     var map = new AMap.Map('container', {
@@ -40,8 +41,7 @@
         map.addControl(geolocation);
         geolocation.getCurrentPosition(function(status,result){
             if(status=='complete'){
-                onComplete(result);
-                regeoCode();
+                onComplete(result)
             }else{
                 onError(result)
             }
@@ -60,18 +60,16 @@
         }//如为IP精确定位结果则没有精度信息
         str.push('是否经过偏移：' + (data.isConverted ? '是' : '否'));
         document.getElementById('result').innerHTML = str.join('<br>');
-       return data.position;
     }
     //解析定位错误信息
     function onError(data) {
         document.getElementById('status').innerHTML='定位失败'
         document.getElementById('result').innerHTML = '失败原因排查信息:'+data.message;
     }
-    
     function regeoCode() {
-        var geocoder,marker;
-    var inglat = onComplete();
+        var inglat =  '104.076721,30.576734';
         alert(inglat)
+        var geocoder,marker;
         if(!geocoder){
             geocoder = new AMap.Geocoder({
                 city: "010", //城市设为北京，默认：“全国”
@@ -92,6 +90,9 @@
             }else{alert(JSON.stringify(result))}
         });
     }
+    regeoCode();
+    
+ 
 </script>
 </body>
 </html>
