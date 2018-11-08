@@ -57,7 +57,7 @@
         document.getElementById('result').innerHTML = '失败原因排查信息:'+data.message;
     }
     function regeoCode() {
-        var inglat =  onComplete;
+        var inglat =  onComplete();
         alert(inglat)
         var geocoder,marker;
         if(!geocoder){
