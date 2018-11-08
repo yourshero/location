@@ -29,18 +29,6 @@
     var map = new AMap.Map('container', {
         resizeEnable: true
     });
-    var geocoder,marker;
-
-    if(!geocoder){
-            geocoder = new AMap.Geocoder({
-                city: "010", //城市设为北京，默认：“全国”
-                radius: 1000 //范围，默认：500
-            });
-        }
-        if(!marker){
-            marker = new AMap.Marker();
-            map.add(marker);
-        }
     AMap.plugin('AMap.Geolocation', function() {
         var geolocation = new AMap.Geolocation({
             enableHighAccuracy: true,//是否使用高精度定位，默认:true
@@ -61,10 +49,28 @@
     });
     //解析定位结果
     function onComplete(data) {
-        var inglat =  data.position;
+        document.getElementById('status').innerHTML='定位成功'
+        document.getElementById('address1').innerHTML = data.position;
+        var str = [];
+        console.log(data); // 所有的定位信息内容
+        str.push('定位结果：' + data.position);
+        document.getElementById('result').innerHTML = str.join('<br>');
+        var inglat =  '104.076721,30.576734';
         alert(inglat)
+        var geocoder,marker;
+        if(!geocoder){
+            geocoder = new AMap.Geocoder({
+                city: "010", //城市设为北京，默认：“全国”
+                radius: 1000 //范围，默认：500
+            });
+        }
         var lnglat  = inglat.split(',');
+         if(!marker){
+            marker = new AMap.Marker();
+            map.add(marker);
+        }
         marker.setPosition(lnglat);
+        
         geocoder.getAddress(lnglat, function(status, result) {
             if (status === 'complete'&&result.regeocode) {
                 var address = result.regeocode.formattedAddress;
@@ -77,7 +83,10 @@
         document.getElementById('status').innerHTML='定位失败'
         document.getElementById('result').innerHTML = '失败原因排查信息:'+data.message;
     }
-
+    function regeoCode() {
+       
+    }
+    regeoCode();
 
 </script>
 </body>
