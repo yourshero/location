@@ -19,6 +19,7 @@
 <div class="info">
     <h4 id='status'></h4><hr>
     <p id='result'></p><hr>
+    <span>城市:</span>
     <span id="address"></span>
 </div>
 <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.10&key=5d0df2d57e93e6bf693da70495c87b81"></script>
@@ -74,7 +75,7 @@
                 radius: 1000 //范围，默认：500
             });
         }
-        var lnglat  = data.position
+        var lnglat  = data.position.split(',');
          if(!marker){
             marker = new AMap.Marker();
             map.add(marker);
