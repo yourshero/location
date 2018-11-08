@@ -55,7 +55,7 @@
         console.log(data); // 所有的定位信息内容
         str.push('定位结果：' + data.position);
         document.getElementById('result').innerHTML = str.join('<br>');
-        var inglat =  '104.076721,30.576734';
+        var inglat = data.position;
         alert(inglat)
         var geocoder,marker;
         if(!geocoder){
