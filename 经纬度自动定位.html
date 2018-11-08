@@ -49,29 +49,7 @@
     });
     //解析定位结果
     function onComplete(data) {
-        document.getElementById('status').innerHTML='定位成功'
-        document.getElementById('address1').innerHTML = data.position;
-        var inglat =  data.position;
-        var geocoder,marker;
-        if(!geocoder){
-            geocoder = new AMap.Geocoder({
-                city: "010", //城市设为北京，默认：“全国”
-                radius: 1000 //范围，默认：500
-            });
-        }
-        var lnglat  = inglat.split(',');
-         if(!marker){
-            marker = new AMap.Marker();
-            map.add(marker);
-        }
-        marker.setPosition(lnglat);
-        
-        geocoder.getAddress(lnglat, function(status, result) {
-            if (status === 'complete'&&result.regeocode) {
-                var address = result.regeocode.formattedAddress;
-                document.getElementById('address').value = address;
-            }else{alert(JSON.stringify(result))}
-        });
+        return data.position
     }
     //解析定位错误信息
     function onError(data) {
@@ -79,7 +57,7 @@
         document.getElementById('result').innerHTML = '失败原因排查信息:'+data.message;
     }
     function regeoCode() {
-        var inglat =  '104.076721,30.576734';
+        var inglat =  onComplete;
         alert(inglat)
         var geocoder,marker;
         if(!geocoder){
@@ -102,6 +80,7 @@
             }else{alert(JSON.stringify(result))}
         });
     }
+    regeoCode();
 
 </script>
 </body>
