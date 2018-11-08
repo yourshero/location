@@ -49,15 +49,8 @@
     });
     //解析定位结果
     function onComplete(data) {
-        return data.position
-    }
-    //解析定位错误信息
-    function onError(data) {
-        document.getElementById('status').innerHTML='定位失败'
-        document.getElementById('result').innerHTML = '失败原因排查信息:'+data.message;
-    }
-    function regeoCode() {
-        var inglat =  onComplete();
+        
+        var inglat =  data.position;
         alert(inglat)
         var geocoder,marker;
         if(!geocoder){
@@ -80,7 +73,12 @@
             }else{alert(JSON.stringify(result))}
         });
     }
-    regeoCode();
+    //解析定位错误信息
+    function onError(data) {
+        document.getElementById('status').innerHTML='定位失败'
+        document.getElementById('result').innerHTML = '失败原因排查信息:'+data.message;
+    }
+
 
 </script>
 </body>
