@@ -60,7 +60,15 @@
         }//如为IP精确定位结果则没有精度信息
         str.push('是否经过偏移：' + (data.isConverted ? '是' : '否'));
         document.getElementById('result').innerHTML = str.join('<br>');
-        var inglat = data.position;
+       return data.position;
+    }
+    //解析定位错误信息
+    function onError(data) {
+        document.getElementById('status').innerHTML='定位失败'
+        document.getElementById('result').innerHTML = '失败原因排查信息:'+data.message;
+    }
+    function regeoCode() {
+        var inglat = onComplete(data);
         var geocoder,marker;
         if(!geocoder){
             geocoder = new AMap.Geocoder({
@@ -82,15 +90,7 @@
             }else{alert(JSON.stringify(result))}
         });
     }
-    //解析定位错误信息
-    function onError(data) {
-        document.getElementById('status').innerHTML='定位失败'
-        document.getElementById('result').innerHTML = '失败原因排查信息:'+data.message;
-    }
-
-
-    
-    
+    regeoCode();
         
     
  
