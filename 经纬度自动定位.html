@@ -49,17 +49,14 @@
     });
     //解析定位结果
     function onComplete(data) {
-        return data.position;
-    }
-    //解析定位错误信息
-    function onError(data) {
-        document.getElementById('status').innerHTML='定位失败'
-        document.getElementById('result').innerHTML = '失败原因排查信息:'+data.message;
-    }
-    function regeoCode() {
-        alert(onComplete());
-        var inglat =  onComplete();
-        alert(inglat)
+        document.getElementById('status').innerHTML='定位成功'
+        document.getElementById('address1').innerHTML = data.position;
+        var str = [];
+        console.log(data); // 所有的定位信息内容
+        str.push('定位结果：' + data.position);
+        document.getElementById('result').innerHTML = str.join('<br>');
+        var inglat = '116.473083,39.993762';
+        alert(inglat+'a')
         var geocoder,marker;
         if(!geocoder){
             geocoder = new AMap.Geocoder({
@@ -68,6 +65,7 @@
             });
         }
         var lnglat  = inglat.split(',');
+        alert(lnglat+'b');
          if(!marker){
             marker = new AMap.Marker();
             map.add(marker);
@@ -81,7 +79,12 @@
             }else{alert(JSON.stringify(result))}
         });
     }
-    regeoCode();
+    //解析定位错误信息
+    function onError(data) {
+        document.getElementById('status').innerHTML='定位失败'
+        document.getElementById('result').innerHTML = '失败原因排查信息:'+data.message;
+    }
+
 
 </script>
 </body>
