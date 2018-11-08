@@ -19,8 +19,9 @@
 <div class="info">
     <h4 id='status'></h4><hr>
     <p id='result'></p><hr>
-    <span>城市:</span>
+    <span>城市1:</span>
     <input id='address' type="text" disabled>
+    <span id="address1"></span>
 </div>
 <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.10&key=5d0df2d57e93e6bf693da70495c87b81"></script>
 <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.10&key=5d0df2d57e93e6bf693da70495c87b81&plugin=AMap.Geocoder"></script>
@@ -49,6 +50,7 @@
     //解析定位结果
     function onComplete(data) {
         document.getElementById('status').innerHTML='定位成功'
+        document.getElementById('address1').innerHTML = data.position;
         var str = [];
         console.log(data); // 所有的定位信息内容
         str.push('定位结果：' + data.position);
