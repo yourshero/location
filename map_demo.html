@@ -40,7 +40,8 @@
         map.addControl(geolocation);
         geolocation.getCurrentPosition(function(status,result){
             if(status=='complete'){
-                onComplete(result)
+                onComplete(result);
+                regeoCode();
             }else{
                 onError(result)
             }
@@ -66,10 +67,11 @@
         document.getElementById('status').innerHTML='定位失败'
         document.getElementById('result').innerHTML = '失败原因排查信息:'+data.message;
     }
+    
     function regeoCode() {
-        var inglat = onComplete(data);
-        alert(inglat)
         var geocoder,marker;
+    var inglat = onComplete();
+        alert(inglat)
         if(!geocoder){
             geocoder = new AMap.Geocoder({
                 city: "010", //城市设为北京，默认：“全国”
@@ -90,9 +92,6 @@
             }else{alert(JSON.stringify(result))}
         });
     }
-    regeoCode();
-    
- 
 </script>
 </body>
 </html>
