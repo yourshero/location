@@ -84,7 +84,7 @@
         geocoder.getAddress(lnglat, function(status, result) {
             if (status === 'complete'&&result.regeocode) {
                 var address = result.regeocode.formattedAddress;
-                document.getElementById('address').value = address;
+                document.getElementById('address').innerHTML = address;
             }else{alert(JSON.stringify(result))}
         });
     }
