@@ -19,9 +19,12 @@
 <div class="info">
     <h4 id='status'></h4><hr>
     <p id='result'></p><hr>
-    <p >由于众多浏览器已不再支持非安全域的定位请求，为保位成功率和精度，请升级您的站点到HTTPS。</p>
+    <span>城市1:</span>
+    <input id='address' type="text" disabled>
+    <span id="address1"></span>
 </div>
-<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.10&key=b1e7a8a97f474ba6d2e68e02fe43599f"></script>
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.10&key=5d0df2d57e93e6bf693da70495c87b81"></script>
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.10&key=bfffe583f28c5fbeb5c2ea599b017911&plugin=AMap.Geocoder"></script>
 <script type="text/javascript">
     var map = new AMap.Map('container', {
         resizeEnable: true
@@ -47,21 +50,42 @@
     //解析定位结果
     function onComplete(data) {
         document.getElementById('status').innerHTML='定位成功'
+        document.getElementById('address1').innerHTML = data.position;
         var str = [];
         console.log(data); // 所有的定位信息内容
         str.push('定位结果：' + data.position);
-        str.push('定位类别：' + data.location_type);
-        if(data.accuracy){
-             str.push('精度：' + data.accuracy + ' 米');
-        }//如为IP精确定位结果则没有精度信息
-        str.push('是否经过偏移：' + (data.isConverted ? '是' : '否'));
         document.getElementById('result').innerHTML = str.join('<br>');
+        var inglat = String(data.position);
+        alert(inglat+'a')
+        var geocoder,marker;
+        if(!geocoder){
+            geocoder = new AMap.Geocoder({
+                city: "010", //城市设为北京，默认：“全国”
+                radius: 1000 //范围，默认：500
+            });
+        }
+        var lnglat  = inglat.split(',');
+        alert(lnglat+'b');
+         if(!marker){
+            marker = new AMap.Marker();
+            map.add(marker);
+        }
+        marker.setPosition(lnglat);
+        
+        geocoder.getAddress(lnglat, function(status, result) {
+            if (status === 'complete'&&result.regeocode) {
+                var address = result.regeocode.formattedAddress;
+                document.getElementById('address').value = address;
+            }else{alert(JSON.stringify(result))}
+        });
     }
     //解析定位错误信息
     function onError(data) {
         document.getElementById('status').innerHTML='定位失败'
         document.getElementById('result').innerHTML = '失败原因排查信息:'+data.message;
     }
+
+
 </script>
 </body>
 </html>
