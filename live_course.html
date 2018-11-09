@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+    <title>直播</title>
+</head>
+<body>
+<div id="id_video_container" style="width:100%; height:auto;"></div>
+<script src="//qzonestyle.gtimg.cn/open/qcloud/video/live/h5/live_connect.js" charset="utf-8"></script>
+<script type="text/javascript">
+    (function () {
+        var player = new qcVideo.Player("id_video_container", {
+            "channel_id": "16093104850682282611",
+            "app_id": "1251783441",
+            "width" : 480,
+            "height" : 320
+        });
+    })()
+</script>
+</body>
+</html>
