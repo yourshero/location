@@ -7,17 +7,17 @@
     <title>直播</title>
 </head>
 <body>
-<div id="id_video_container" style="width:100%; height:auto;"></div>
-<script src="//qzonestyle.gtimg.cn/open/qcloud/video/live/h5/live_connect.js" charset="utf-8"></script>
-<script type="text/javascript">
-    (function () {
-        var player = new qcVideo.Player("id_video_container", {
-            "channel_id": "10905947996257374840",
-            "app_id": "1258016507",
-            "width" : 480,
-            "height" : 320
-        });
-    })()
-</script>
+    <div id="id_video_container_10905947996257381326" style="width:100%;height:1px;"></div>
+    <script src="http://imgcache.qq.com/open/qcloud/video/live/h5/live_connect.js" charset="utf-8"></script>
+     <script type="text/javascript">
+                (function(){
+                   var option ={"channel_id":"10905947996257381326","app_id":"1258016507","width":"1024","height":"768"};
+                   new qcVideo.Player(
+                           /*代码中的id_video_container将会作为播放器放置的容器使用,可自行替换*/
+                           "id_video_container_10905947996257381326",
+                           option
+                       );
+                 })()
+     </script> 
 </body>
 </html>
