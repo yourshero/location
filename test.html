@@ -1,0 +1,90 @@
+<html>
+<meta name="viewport" content="width=device-width user-scalable= 'no'">
+<style>
+    body {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        margin: 0;
+    }
+</style>
+
+<body>
+    <iframe src="http://mudu.tv/watch/2528244" width="100%" height="100%" frameborder="0" scrolling='no' id='iframe'>
+        <p>Your browser does not support iframes.</p>
+    </iframe>
+    <div class="bottom">
+        <div class="bootom-wrap">
+            <div class="timer" id="timer"><button>签到</button></div>
+        </div>
+    </div>
+</body>
+
+</html>
+<!-- http://mudu.tv/watch/2528244 -->
+<script src="libs/jquery/jquery.min.js"></script>
+<script>
+    window.onload = function () {
+        function dynamicLoadCss(url) {
+            var head = document.getElementsByTagName('head')[0];
+            var link = document.createElement('link');
+            link.type = 'text/css';
+            link.rel = 'stylesheet';
+            link.href = url;
+            head.appendChild(link);
+        }
+        let pc_css = 'css/css-pc.css';
+        let mobile_css = 'css/css-moble.css';
+        let time = new Date().getHours();
+        var maxtime = 9; //一个小时，按秒计算，自己调整! 
+        function CountDown() {
+            if (maxtime >= 0) {
+                minutes = Math.floor(maxtime / 60);
+                seconds = Math.floor(maxtime % 60);
+                msg = "(距离开始签到还有" + minutes + "分" + seconds + "秒)";
+                $('.timer').html('<span>签到</span>' + msg);
+                // if (maxtime == 5 * 60)alert("还剩5分钟");
+                --maxtime;
+            } else {
+                clearInterval(timer);
+                $('.timer').html('<span>可以签到了</span>');
+                $('.timer').on('click', function () {
+                    console.log(1);
+                    $('.timer').hide();
+                })
+            }
+        }
+        if (/Android|webOS|iPhone|BlackBerry|iPod/i.test(navigator.userAgent)) {
+            dynamicLoadCss(mobile_css);
+            if (time < 18) {
+                $('.bottom').show();
+                $('.bottom').on('click', function (event) {
+                    console.log(1);
+                    $('.timer').html('签到(距离开始签到还有0分10秒)');
+                    timer = setInterval(CountDown, 1000);
+                    $(this).unbind();
+                })
+            } else {
+                $('.bottom').hide();
+            }
+        } else if (/(iPad)/i.test(navigator.userAgent)) {
+            alert('暂不支持ipad签到，请使用手机或者电脑签到');
+        } else {
+            dynamicLoadCss(pc_css);
+            if (time < 18) {
+                $('.timer').show();
+                $('.timer').on('click', function (event) {
+                    $('.timer').html('签到(距离开始签到还有0分10秒)');
+                    timer = setInterval(CountDown, 1000);
+                    $(this).unbind();
+                })
+            } else {
+                $('.timer').hide();
+            }
+        }
+        var test = document.getElementById('iframe').contentWindow.document.getElementById('iframe里要获取的元素的id');
+        console.log(test);
+    }
+ 
+</script>

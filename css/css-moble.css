@@ -1,0 +1,31 @@
+.bottom{
+    height: 30px;
+    width: 100%;
+    position: fixed;
+    bottom: 56px;
+    box-sizing: border-box;
+    height: 30px;
+    cursor:pointer;
+}
+.bottom button{
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    background: #fff;
+    border-radius: 29px;
+    line-height: 30px;
+    color: #333;
+    font-size: 0.3rem;
+    border:none;
+}
+.bottom button:focus{outline:0;} 
+.timer{
+    height: 100%;
+    font-size: 0.3rem;
+    text-align: center;
+    line-height: 30px;
+    /* background-color: rgb(235,208,187); */
+    border-radius: 30px;
+    border: 1px solid #b57b7b;
+    background-color: #fff;
+}
