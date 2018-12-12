@@ -59,7 +59,7 @@
             dynamicLoadCss(mobile_css);
             if (time < 18) {
                 $('.bottom').show();
-                $('.bottom').on('click', function (event) {
+                $('.bottom').on('touchstart', function (event) {
                     console.log(1);
                     $('.timer').html('签到(距离开始签到还有0分10秒)');
                     timer = setInterval(CountDown, 1000);
