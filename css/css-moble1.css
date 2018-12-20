@@ -1,0 +1,64 @@
+html{
+    font-size: 100px;
+}
+
+@media only screen and (max-width: 414px){
+ html{
+        font-size: 64px;
+    }
+}
+@media only screen and (max-width: 375px){
+    html{
+        font-size: 58px;
+    }
+}
+@media only screen and (max-width: 360px){
+    html{
+        font-size: 56px;
+    }
+}
+@media only screen and (max-width: 320px){
+    html{
+        font-size: 50px;
+    }
+}
+.bottom{
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    right: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    box-sizing: border-box;
+    cursor:pointer;
+}
+.bootom-wrap{
+    height: 0.8rem;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    margin-top: -0.4rem;
+}
+.bottom button{
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    background: #fff;
+    border-radius: 0.1rem;
+    line-height: 30px;
+    color: #44536a;
+    font-size: 0.3rem;
+    border:none;
+}
+.bottom button:focus{outline:0;} 
+.timer{
+    height: 100%;
+    text-align: center;
+    /* background-color: rgb(235,208,187); */
+    border-radius: 0.1rem;
+    border: 1px solid #b57b7b;
+    background-color: #fff;
+    cursor: pointer;
+}
